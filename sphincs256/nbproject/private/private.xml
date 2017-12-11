@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/sphincs/Sphincs.java</file>
             <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/sphincs/Horst.java</file>
+            <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/sphincs/Chacha20.java</file>
             <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/general_utils/Tree.java</file>
             <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/sphincs/WotsPlus.java</file>
             <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/general_utils/Bytes.java</file>
+            <file>file:/C:/Users/Eu/Documents/NetBeansProjects/Trab3CPQ/src/sphincs/HashFunctions.java</file>
         </group>
     </open-files>
 </project-private>

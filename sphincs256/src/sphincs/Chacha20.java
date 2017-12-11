@@ -138,7 +138,7 @@ public class Chacha20 {
         }
         System.out.println();
     }
-
+/*
     public static void main(String[] args) {
         byte[] key = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0".getBytes(); // must 32
         // printHexString(key);
@@ -160,4 +160,5 @@ public class Chacha20 {
         System.out.println(new String(origin));
         printHexString(origin);
     }
+*/
 }

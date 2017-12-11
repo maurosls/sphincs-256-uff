@@ -6,6 +6,7 @@
 package sphincs;
 
 import java.math.*;
+import java.util.List;
 /**
  *
  * @author Eu
@@ -37,7 +38,7 @@ public class WotsPlus {
     public /*tem que descobrir o tipo de retorno*/ void chainlengths(/*verificar parametros*/){
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void keygen(/*verificar parametros*/){
+    public /*tem que descobrir o tipo de retorno*/ void keygen(byte[] seed, List<byte[]> masks){
     }
 
     public /*tem que descobrir o tipo de retorno*/ void sign(/*verificar parametros*/){
@@ -45,4 +46,9 @@ public class WotsPlus {
 
     public /*tem que descobrir o tipo de retorno*/ void verify(/*verificar parametros*/){
     }
+
+    public int getL() {
+        return l;
+    }
+    
 }
