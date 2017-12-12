@@ -19,8 +19,8 @@ public class Horst {
     private int bitsMsgHash;
     private int lenSecKeyRevealed;
     private int treeLayers;
-    private int t;//não sei o que é
-    private int x;//não sei o que é
+    private int t;
+    private int x;
     
     public Horst(int lenHashes, int lenMsgHash, int secretKeyRevealed, int treeLayers){
         assert secretKeyRevealed*treeLayers == lenMsgHash;
@@ -32,20 +32,22 @@ public class Horst {
         //this.x = Math.max();
     }
     
-    public List<Integer> genMsgIdx(){
+    public List<Integer> genMsgIdx(/*message*/){
         List<Integer> msgIdx = new ArrayList<>();
         
         return msgIdx;
     }
     
-    public /*tem que descobrir o tipo de retorno*/ void keygen (/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void keygen (/*seed, masks*/){
         
     }
     
-    public /*tem que descobrir o tipo de retorno*/ void sign(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void sign(/*message, seed, masks*/){
+        
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void verify(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void verify(/*message, signature, masks*/){
+        
     }
     
 }

@@ -141,16 +141,16 @@ public class Sphincs {
         //return pubKey1;
     }
 
-    private /*verificar tipo de retorno*/ void sign(/*verificar parametros*/){
+    private /*verificar tipo de retorno*/ void sign(/*message, */KeysComponents secKey){
     }
 
-    private /*verificar tipo de retorno*/ void verify(/*verificar parametros*/){
+    private /*verificar tipo de retorno*/ void verify(/*message, signature, */KeysComponents pubKey){
     }
 
-    private /*verificar tipo de retorno*/ void pack(/*verificar parametros*/){
+    private /*verificar tipo de retorno*/ void pack(/*x*/){
     }
 
-    private /*verificar tipo de retorno*/ void unpack(/*verificar parametros*/){
+    private /*verificar tipo de retorno*/ void unpack(/*secKey, pubKey, signature, byteSequence*/){
     }
     
     public static void main(String[] args) {

@@ -29,22 +29,22 @@ public class WotsPlus {
         this.l = this.l1+this.l2;
     }
     
-    public /*tem que descobrir o tipo de retorno*/ void chains(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void chains(/*x, masks, chainRange*/){
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void int_to_basew(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void int_to_basew(/*x, base*/){
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void chainlengths(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void chainSizes(/*message*/){
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void keygen(byte[] seed, List<byte[]> masks){
+    public /*verificar tipo de retorno*/ void keygen(byte[] seed, List<byte[]> masks){
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void sign(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void sign(/*message,*/byte[] seed, List<byte[]> masks){
     }
 
-    public /*tem que descobrir o tipo de retorno*/ void verify(/*verificar parametros*/){
+    public /*verificar tipo de retorno*/ void verify(/*message, signature, */List<byte[]> masks){
     }
 
     public int getL() {
