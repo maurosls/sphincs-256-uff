@@ -1,90 +1,78 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package general_utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA_256;
 import static org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA_512;
 
-/**
- *
- * @author Eu
- */
 public class Hash {
     
-    private static final byte[] hashc = StringsUtils.stringToByteArray
+    private static final byte[] HASHC = StringsUtils.stringToByteArray
                                         ("expand 32-byte to 64-byte state!");
-    private final boolean dig256;
-    private final boolean dig512;
+    private final DigestUtils dig256;
+    private final DigestUtils dig512;
     private final ChaCha permutation12 = new ChaCha();
 
-    Hash(boolean dig256)
+    public Hash(DigestUtils dig256)
     {
-        this(dig256, false);
+        this(dig256, null);
     }
 
-    Hash(boolean dig256, boolean dig512)
+    public Hash(DigestUtils dig256, DigestUtils dig512)
     {
         this.dig256 = dig256;
         this.dig512 = dig512;
     }
 
-    int varlen_hash(byte[] out, int outOff, byte[] in, int inLen)
+    int varlen_hash(byte[] out, int outOffset, byte[] in, int inLength)
     {
-//        dig256.update(in, 0, inLen);
-//
-//        dig256.doFinal(out, outOff);
         out = new DigestUtils(SHA_256).digest(in);
-
         return 0;
     }
 
-    Digest getMessageHash()
+    public DigestUtils getMessageHash()
     {
-        return dig512;
+        return new DigestUtils(SHA_512);
     }
 
-    int hash_2n_n(byte[] out, int outOff, byte[] in, int inOff)
+    private int hash_2n_n(byte[] out, int outOffset, byte[] in, int inOffset)
     {
         byte[] x = new byte[64];
         int i;
         for (i = 0; i < 32; i++)
         {
-            x[i] = in[inOff + i];
-            x[i + 32] = hashc[i];
+            x[i] = in[inOffset + i];
+            x[i + 32] = HASHC[i];
         }
         permutation12.chachaPermute(x, x);
         for (i = 0; i < 32; i++)
         {
-            x[i] = (byte)(x[i] ^ in[inOff + i + 32]);
+            x[i] = (byte)(x[i] ^ in[inOffset + i + 32]);
         }
         permutation12.chachaPermute(x, x);
         for (i = 0; i < 32; i++)
         {
-            out[outOff + i] = x[i];
+            out[outOffset + i] = x[i];
         }
 
         return 0;
     }
 
-    int hash_2n_n_mask(byte[] out, int outOff, byte[] in, int inOff, byte[] mask, int maskOff)
+    public int hash_2n_n_mask(byte[] out, int outOffset, byte[] in, int inOffset, 
+                       byte[] mask, int maskOffset)
     {
         byte[] buf = new byte[2 * 32];
         int i;
         for (i = 0; i < 2 * 32; i++)
         {
-            buf[i] = (byte)(in[inOff + i] ^ mask[maskOff + i]);
+            buf[i] = (byte)(in[inOffset + i] ^ mask[maskOffset + i]);
         }
 
-        int rv = hash_2n_n(out, outOff, buf, 0);
+        int rv = hash_2n_n(out, outOffset, buf, 0);
 
         return rv;
     }
 
-    int hash_n_n(byte[] out, int outOff, byte[] in, int inOff)
+    int hash_n_n(byte[] out, int outOffset, byte[] in, int inOffset)
     {
 
         byte[] x = new byte[64];
@@ -92,26 +80,27 @@ public class Hash {
 
         for (i = 0; i < 32; i++)
         {
-            x[i] = in[inOff + i];
-            x[i + 32] = hashc[i];
+            x[i] = in[inOffset + i];
+            x[i + 32] = HASHC[i];
         }
         permutation12.chachaPermute(x, x);
         for (i = 0; i < 32; i++)
         {
-            out[outOff + i] = x[i];
+            out[outOffset + i] = x[i];
         }
 
         return 0;
     }
 
-    int hash_n_n_mask(byte[] out, int outOff, byte[] in, int inOff,  byte[] mask, int maskOff)
+    int hash_n_n_mask(byte[] out, int outOffset, byte[] in, int inOffset , 
+                      byte[] mask, int maskOffset)
     {
         byte[] buf = new byte[32];
         int i;
         for (i = 0; i < 32; i++)
         {
-            buf[i] = (byte)(in[inOff + i] ^ mask[maskOff + i]);
+            buf[i] = (byte)(in[inOffset + i] ^ mask[maskOffset + i]);
         }
-        return hash_n_n(out, outOff, buf, 0);
+        return hash_n_n(out, outOffset, buf, 0);
     }
 }

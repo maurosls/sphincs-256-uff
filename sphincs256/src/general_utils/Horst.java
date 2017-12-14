@@ -1,33 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package general_utils;
 
-/**
- *
- * @author Eu
- */
 public class Horst {
     
-    static final int SPHINCS256_HASH_LENGTH = 32;
-    static final int HORST_LOGT = 16;
-    static final int HORST_T = (1<<HORST_LOGT);
-    static final int HORST_K = 32;
-    static final int HORST_SKBYTES = 32;
-    static final int HORST_SIGBYTES = (64* SPHINCS256_HASH_LENGTH+((
+    private static final int SPHINCS256_HASH_LENGTH = 32;
+    private static final int HORST_LOGT = 16;
+    public static final int HORST_T = (1<<HORST_LOGT);
+    public static final int HORST_K = 32;
+    private static final int HORST_SKBYTES = 32;
+    public static final int HORST_SIGBYTES = (64* SPHINCS256_HASH_LENGTH+((
                                        (HORST_LOGT-6)* SPHINCS256_HASH_LENGTH)+
                                         HORST_SKBYTES)*HORST_K);
 
-    static final int N_MASKS = (2*(Horst.HORST_LOGT));
+    public static final int N_MASKS = (2*(Horst.HORST_LOGT));
 
-    static void expand_seed(byte[] outseeds, byte[] inseed)
+    private static void expand_seed(byte[] outseeds, byte[] inseed)
     {
         Seed.prg(outseeds, 0, HORST_T * HORST_SKBYTES, inseed, 0);
     }
 
-    static int horst_sign(Hash hs,
+    public static int horst_sign(Hash hs,
                           byte[] sig, int sigOff, byte[] pk,
                           byte[] seed,
                           byte[] masks,
@@ -42,9 +33,6 @@ public class Horst {
 
         expand_seed(sk, seed);
 
-        // Build the whole tree and save it
-
-        // Generate pk leaves
         for (i = 0; i < HORST_T; i++)
         {
             hs.hash_n_n(tree, (HORST_T - 1 + i) * SPHINCS256_HASH_LENGTH, sk, i * HORST_SKBYTES);
@@ -79,10 +67,10 @@ public class Horst {
             idx += (HORST_T - 1);
             for (j = 0; j < HORST_LOGT - 6; j++)
             {
-                idx = ((idx & 1) != 0) ? idx + 1 : idx - 1; // neighbor node
+                idx = ((idx & 1) != 0) ? idx + 1 : idx - 1;
                 for (k = 0; k < SPHINCS256_HASH_LENGTH; k++)
                     sig[sigpos++] = tree[idx * SPHINCS256_HASH_LENGTH + k];
-                idx = (idx - 1) / 2; // parent node
+                idx = (idx - 1) / 2;
             }
         }
 
@@ -94,7 +82,7 @@ public class Horst {
         return HORST_SIGBYTES;
     }
 
-    static int horst_verify(Hash hs, byte[] pk, byte[] sig, int sigOff, byte[] masks, byte[] m_hash)
+    public static int horst_verify(Hash hs, byte[] pk, byte[] sig, int sigOff, byte[] masks, byte[] m_hash)
     {
         byte[] buffer = new byte[ 32 * SPHINCS256_HASH_LENGTH];
 
@@ -123,7 +111,7 @@ public class Horst {
 
             for (j = 1; j < HORST_LOGT - 6; j++)
             {
-                idx = idx >>> 1; // parent node
+                idx = idx >>> 1;
 
                 if ((idx & 1) == 0)
                 {

@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package general_utils;
 
-/**
- *
- * @author Eu
- */
 public class WotsPlus {
     
-    static final int SPHINCS256_HASH_LENGTH = 32;
-    static final int WOTS_LOGW = 4;
-    static final int WOTS_W = (1 << WOTS_LOGW);
-    static final int WOTS_L1 = ((256 + WOTS_LOGW - 1) / WOTS_LOGW);
-    static final int WOTS_L = 67;
-    static final int WOTS_LOG_L = 7;
-    static final int WOTS_SIGBYTES = (WOTS_L * SPHINCS256_HASH_LENGTH);
+    private static final int SPHINCS256_HASH_LENGTH = 32;
+    private static final int WOTS_LOGW = 4;
+    private static final int WOTS_W = (1 << WOTS_LOGW);
+    private static final int WOTS_L1 = ((256 + WOTS_LOGW - 1) / WOTS_LOGW);
+    public static final int WOTS_L = 67;
+    public static final int WOTS_LOG_L = 7;
+    public static final int WOTS_SIGBYTES = (WOTS_L * SPHINCS256_HASH_LENGTH);
     
-    static void expand_seed(byte[] outseeds, int outOff, byte[] inseed, int inOff)
+    private static void expand_seed(byte[] outseeds, int outOff, byte[] inseed, int inOff)
     {
         clear(outseeds, outOff, WOTS_L * SPHINCS256_HASH_LENGTH);
 
@@ -34,7 +25,7 @@ public class WotsPlus {
         }
     }
 
-    static void gen_chain(Hash hs, byte[] out, int outOff, byte[] seed, int seedOff, 
+    private static void gen_chain(Hash hs, byte[] out, int outOff, byte[] seed, int seedOff, 
                           byte[] masks, int masksOff, int chainlen)
     {
         int i, j;
@@ -47,7 +38,7 @@ public class WotsPlus {
     }
 
 
-    void wots_pkgen(Hash hs, byte[] pk, int pkOff, byte[] sk, int skOff, byte[] masks, int masksOff)
+    public void wots_pkgen(Hash hs, byte[] pk, int pkOff, byte[] sk, int skOff, byte[] masks, int masksOff)
     {
         int i;
         expand_seed(pk, pkOff, sk, skOff);
@@ -57,7 +48,7 @@ public class WotsPlus {
     }
 
 
-    void wots_sign(Hash hs, byte[] sig, int sigOff, byte[] msg, byte[] sk, byte[] masks)
+    public void wots_sign(Hash hs, byte[] sig, int sigOff, byte[] msg, byte[] sk, byte[] masks)
     {
         int[] basew = new int[WOTS_L];
         int i, c = 0;
@@ -83,7 +74,7 @@ public class WotsPlus {
                       sig, sigOff + i * SPHINCS256_HASH_LENGTH, masks, 0, basew[i]);
     }
 
-    void wots_verify(Hash hs, byte[] pk, byte[] sig, int sigOff, byte[] msg, byte[] masks)
+    public void wots_verify(Hash hs, byte[] pk, byte[] sig, int sigOff, byte[] msg, byte[] masks)
     {
         int[] basew = new int[WOTS_L];
         int i, c = 0;

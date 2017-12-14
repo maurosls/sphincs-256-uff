@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package general_utils;
 
-/**
- *
- * @author Eu
- */
 public class ChaCha {
     
-    private static final int chachaRounds = 12;
+    private static final int CHACHA_ROUNDS = 12;
 
     protected static int rotate(int x, int y)
     {
@@ -20,14 +11,6 @@ public class ChaCha {
 
     public static void permute(int rounds, int[] x)
     {
-//        if (x.length != 16)
-//        {
-//            throw new IllegalArgumentException();
-//        }
-//        if (rounds % 2 != 0)
-//        {
-//            throw new IllegalArgumentException("Number of rounds must be even");
-//        }
 
         int x00 = x[ 0];
         int x01 = x[ 1];
@@ -116,7 +99,7 @@ public class ChaCha {
             x[i] = n;
         }
 
-        permute(chachaRounds, x);
+        permute(CHACHA_ROUNDS, x);
 
         for (i = 0; i < 16; ++i)
         {

@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package general_utils;
 
-/**
- *
- * @author Eu
- */
 public class Seed {
     
-    static final int SPHINCS256_SEED_LENGTH = 32;
+    private static final int SPHINCS256_SEED_LENGTH = 32;
     
-    static void get_seed(Hash hs, byte[] seed, int seedOff, byte[] sk, Tree.leafaddr a)
+    public static void get_seed(Hash hs, byte[] seed, int seedOff, byte[] sk, Tree.leafaddr a)
     {
         byte[] buffer = new byte[SPHINCS256_SEED_LENGTH + 8];
         long t;
@@ -45,17 +36,11 @@ public class Seed {
     }
 
 
-
+    //INCOMPLETO
     static void prg(byte[] r, int rOff, long rlen, byte[] key, int keyOff)
     {
         byte[]  nonce = new byte[8];
 
-        StreamCipher cipher = new ChaChaEngine(12);
-
-        cipher.init(true, new ParametersWithIV(new KeyParameter(key, keyOff, 32), nonce));
-
-        cipher.processBytes(r, rOff, (int)rlen, r, rOff);
-
-        //crypto_stream_chacha12(r, rlen, nonce, key);
+        
     }
 }

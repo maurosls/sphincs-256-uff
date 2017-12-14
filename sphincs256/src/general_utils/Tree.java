@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package general_utils;
 
-/**
- *
- * @author Eu
- */
 public class Tree {
     
-    static final int SPHINCS256_HASH_LENGTH = 32;
-    static final int SPHINCS256_SEED_LENGTH = 32;
+    private static final int SPHINCS256_HASH_LENGTH = 32;
+    private static final int SPHINCS256_SEED_LENGTH = 32;
     
-    static class leafaddr
+    public static class leafaddr
     {
-        int level;
-        long subtree;
-        long subleaf;
+        public int level;
+        public long subtree;
+        public long subleaf;
 
         public leafaddr()
         {
@@ -33,7 +24,7 @@ public class Tree {
         }
     }
 
-    static void l_tree(Hash hs, byte[] leaf, int leafOff, byte[] wots_pk, int pkOff, 
+    public static void l_tree(Hash hs, byte[] leaf, int leafOff, byte[] wots_pk, int pkOff, 
                        byte[] masks, int masksOff)
     {
         int l = WotsPlus.WOTS_L;
@@ -62,7 +53,7 @@ public class Tree {
         System.arraycopy(wots_pk, pkOff, leaf, leafOff, SPHINCS256_HASH_LENGTH);
     }
 
-    static void treehash(Hash hs, byte[] node, int nodeOff, int height, byte[] sk, 
+    public static void treehash(Hash hs, byte[] node, int nodeOff, int height, byte[] sk, 
                          leafaddr leaf, byte[] masks, int masksOff)
     {
         leafaddr a = new leafaddr(leaf);
@@ -81,7 +72,6 @@ public class Tree {
             stackoffset++;
             while (stackoffset > 1 && stacklevels[stackoffset - 1] == stacklevels[stackoffset - 2])
             {
-                //MASKS
                 int maskoffset = 2 * (stacklevels[stackoffset - 1] + 
                                       WotsPlus.WOTS_LOG_L) * SPHINCS256_HASH_LENGTH;
 
@@ -98,7 +88,7 @@ public class Tree {
         }
     }
 
-    static void gen_leaf_wots(Hash hs, byte[] leaf, int leafOff, byte[] masks, 
+    private static void gen_leaf_wots(Hash hs, byte[] leaf, int leafOff, byte[] masks, 
                               int masksOff, byte[] sk, leafaddr a)
     {
         byte[] seed = new byte[SPHINCS256_SEED_LENGTH];
